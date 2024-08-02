@@ -1,46 +1,35 @@
 {
   "version": 1,
-  "author": "Anderson Costa",
+  "author": "chen ken",
   "editor": "wokwi",
   "parts": [
-    {
-      "type": "wokwi-pi-pico",
-      "id": "pico",
-      "top": 73.65,
-      "left": 147.6,
-      "attrs": { "env": "micropython-20220618-v1.19.1" }
-    },
-    { "type": "board-ssd1306", "id": "oled1", "top": -16.06, "left": 134.63, "attrs": {} },
+    { "type": "board-pi-pico-w", "id": "pico", "top": 15.95, "left": -6.05, "attrs": {} },
+    { "type": "board-ssd1306", "id": "oled1", "top": -92.86, "left": 0.23, "attrs": {} },
     {
       "type": "wokwi-led-bar-graph",
       "id": "bargraph1",
-      "top": 148.8,
-      "left": 34,
+      "top": 81.6,
+      "left": -110.4,
       "attrs": { "color": "lime" }
     },
     {
       "type": "wokwi-dht22",
       "id": "dht1",
-      "top": -47.7,
-      "left": 301.8,
-      "attrs": { "temperature": "16.6", "humidity": "48" }
+      "top": -114.9,
+      "left": 138.6,
+      "attrs": { "temperature": "54.9", "humidity": "41" }
     },
     {
       "type": "wokwi-pushbutton",
       "id": "btn1",
-      "top": 207.8,
-      "left": 259.2,
+      "top": 150.2,
+      "left": 105.6,
       "attrs": { "color": "green", "bounce": "1" }
     }
   ],
   "connections": [
-    [ "oled1:GND", "pico:GND.8", "black", [ "v-9.6", "h76.8", "v134.4" ] ],
-    [ "oled1:VCC", "pico:VBUS", "red", [ "v-19.2", "h76.95", "v9.6" ] ],
-    [ "oled1:SCL", "pico:GP3", "green", [ "v-28.8", "h-66.9", "v172.8" ] ],
-    [ "oled1:SDA", "pico:GP2", "green", [ "v-38.4", "h-86.33", "v172.8" ] ],
-    [ "dht1:VCC", "pico:VBUS", "red", [ "v0" ] ],
-    [ "dht1:SDA", "pico:GP28", "green", [ "v0" ] ],
-    [ "dht1:GND", "pico:GND.8", "black", [ "v0" ] ],
+    [ "pico:GP0", "$serialMonitor:RX", "", [] ],
+    [ "pico:GP1", "$serialMonitor:TX", "", [] ],
     [ "bargraph1:C1", "bargraph1:C2", "green", [ "v0" ] ],
     [ "bargraph1:C2", "bargraph1:C3", "green", [ "h0" ] ],
     [ "bargraph1:C3", "bargraph1:C4", "green", [ "h0" ] ],
@@ -50,19 +39,26 @@
     [ "bargraph1:C7", "bargraph1:C8", "green", [ "h0" ] ],
     [ "bargraph1:C8", "bargraph1:C9", "green", [ "h0" ] ],
     [ "bargraph1:C10", "bargraph1:C9", "green", [ "h0" ] ],
-    [ "bargraph1:C10", "pico:GND.4", "green", [ "h0.22", "v9.59" ] ],
-    [ "bargraph1:A1", "pico:GP4", "green", [ "h0", "v-19.2" ] ],
-    [ "bargraph1:A2", "pico:GP5", "green", [ "h-9.6", "v-19.2" ] ],
-    [ "bargraph1:A3", "pico:GP6", "green", [ "h-19.2", "v-48", "h86.4", "v28.8" ] ],
-    [ "bargraph1:A4", "pico:GP7", "green", [ "h-28.8", "v-67.2", "h86.4", "v57.6" ] ],
-    [ "bargraph1:A5", "pico:GP8", "green", [ "h-38.4", "v-86.41", "h86.4", "v76.8" ] ],
-    [ "bargraph1:A6", "pico:GP9", "green", [ "h-38.4", "v57.59", "h124.8", "v-67.2" ] ],
-    [ "bargraph1:A7", "pico:GP10", "green", [ "h-28.8", "v57.59", "h105.6", "v-67.2" ] ],
-    [ "bargraph1:A8", "pico:GP11", "green", [ "h-19.2", "v57.59", "h86.4", "v-57.6" ] ],
-    [ "bargraph1:A9", "pico:GP12", "green", [ "h-9.6", "v57.59", "h67.2", "v-57.6" ] ],
-    [ "bargraph1:A10", "pico:GP13", "green", [ "h0", "v57.59", "h48", "v-57.6" ] ],
-    [ "pico:GND.5", "btn1:2.l", "black", [ "h0" ] ],
-    [ "pico:GP21", "btn1:1.l", "green", [ "h0" ] ]
+    [ "btn1:2.l", "pico:GND.5", "green", [ "h0" ] ],
+    [ "btn1:1.l", "pico:GP21", "green", [ "h0" ] ],
+    [ "pico:GP28", "dht1:SDA", "green", [ "h0" ] ],
+    [ "dht1:GND", "pico:GND.8", "black", [ "v0" ] ],
+    [ "dht1:VCC", "pico:VBUS", "red", [ "v0" ] ],
+    [ "oled1:SCL", "pico:GP3", "green", [ "v-19.2", "h-66.9", "v172.8" ] ],
+    [ "oled1:SDA", "pico:GP2", "green", [ "v-28.8", "h-86.33", "v172.8" ] ],
+    [ "bargraph1:A1", "pico:GP4", "green", [ "h0", "v-9.6", "h48" ] ],
+    [ "bargraph1:A2", "pico:GP5", "green", [ "h-9.6", "v-28.8", "h57.6", "v19.2" ] ],
+    [ "bargraph1:A3", "pico:GP6", "green", [ "h-19.2", "v-48", "h76.8", "v38.4" ] ],
+    [ "bargraph1:A4", "pico:GP7", "green", [ "h-28.8", "v-67.2", "h96", "v67.2" ] ],
+    [ "bargraph1:A5", "pico:GP8", "green", [ "h-38.4", "v-86.41", "h115.2", "v86.4" ] ],
+    [ "bargraph1:A6", "pico:GP9", "green", [ "h-48", "v67.19", "h124.8", "v9.6" ] ],
+    [ "bargraph1:A7", "pico:GP10", "green", [ "h-38.4", "v47.99", "h105.6", "v-48" ] ],
+    [ "bargraph1:A8", "pico:GP11", "green", [ "h-28.8", "v28.79", "h86.4", "v-19.2" ] ],
+    [ "bargraph1:A9", "pico:GP12", "green", [ "h-19.2", "v57.59", "h96", "v-48", "h9.6" ] ],
+    [ "bargraph1:A10", "pico:GP13", "green", [ "h-9.6", "v38.39", "h96", "v-28.8" ] ],
+    [ "bargraph1:C10", "pico:GND.4", "green", [ "h0.22", "v57.59", "h67.2", "v-38.4" ] ],
+    [ "oled1:VCC", "pico:VBUS", "red", [ "v-38.4", "h67.35", "v153.6" ] ],
+    [ "oled1:GND", "pico:GND.8", "black", [ "v-48", "h86.4", "v182.4" ] ]
   ],
   "dependencies": {}
 }
